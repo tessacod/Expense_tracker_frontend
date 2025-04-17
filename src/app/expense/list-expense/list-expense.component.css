@@ -1,0 +1,82 @@
+.expense-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  h1 {
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  h2 {
+    margin-bottom: 15px;
+    color: #444;
+  }
+  
+  .filter-section {
+    margin-bottom: 20px;
+    display: inline-block;
+    margin-right: 20px;
+  }
+  
+  select {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: white;
+    min-width: 200px;
+  }
+  
+  .add-btn {
+    margin-bottom: 20px;
+  }
+  
+  .expense-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .expense-table th, 
+  .expense-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .expense-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  
+  .expense-table tr:hover {
+    background-color: #f5f5f5;
+  }
+  
+  .action-buttons button {
+    margin-right: 5px;
+  }
+  
+  .no-data {
+    text-align: center;
+    font-style: italic;
+    color: #777;
+  }
+  
+  .total {
+    font-size: 18px;
+    text-align: right;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f2f2f2;
+    border-radius: 4px;
+  }
+  
+  .edit-btn {
+    background-color: #007bff;
+  }
+  
+  .delete-btn {
+    background-color: #dc3545;
+  }

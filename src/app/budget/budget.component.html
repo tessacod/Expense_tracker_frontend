@@ -1,0 +1,55 @@
+
+
+<div class="budget-container">
+  <h2>Budget Management</h2>
+  
+  <div *ngIf="isLoading" class="loading-spinner">
+    <div class="spinner"></div>
+    <p>Loading budget data...</p>
+  </div>
+  
+  <div *ngIf="!isLoading">
+    <div *ngIf="isNewUser" class="welcome-message">
+      <h3>Welcome to Budget Management!</h3>
+      <p>Set your monthly budget to start tracking your expenses effectively.</p>
+    </div>
+    
+    <div *ngIf="!isNewUser" class="budget-overview">
+      <h3>Monthly Budget Overview</h3>
+      <div class="budget-amount">Rs.{{spentAmount.toLocaleString()}} / Rs.{{totalBudget.toLocaleString()}}</div>
+      <div class="progress-bar-container">
+        <div class="progress-bar" [style.width]="progressWidth" 
+             [ngClass]="{'danger': remainingPercentage <= 20}"></div>
+      </div>
+      
+      <div class="remaining-text">{{remainingPercentage}}% remaining this month</div>
+    </div>
+    
+    <div class="budget-form">
+      <div class="form-group">
+        <label for="budgetAmount">{{ isNewUser ? 'Set Your Budget Amount' : 'Update Budget Amount' }}</label>
+        <input 
+          type="number" 
+          id="budgetAmount" 
+          name="budgetAmount" 
+          [value]="newBudgetAmount" 
+          (input)="onBudgetInputChange($event)"
+          placeholder="Enter budget amount">
+      </div>
+      
+      <button class="update-btn" (click)="updateBudget()">
+        {{ isNewUser ? 'Set Budget' : 'Update Budget' }}
+      </button>
+    </div>
+    
+    <div *ngIf="!isNewUser" class="budget-tips">
+      <h3>Budget Tips</h3>
+      <ul>
+        <li>Review your spending patterns regularly to identify areas where you can save</li>
+        <li>Consider setting category-specific budgets for better expense management</li>
+        <li>Aim to save at least 20% of your income each month</li>
+        <li>Adjust your budget as your financial situation changes</li>
+      </ul>
+    </div>
+  </div>
+</div>

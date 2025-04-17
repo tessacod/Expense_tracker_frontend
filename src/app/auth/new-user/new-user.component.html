@@ -1,0 +1,128 @@
+<div class="register-container">
+  <div class="register-card">
+    <h2>Create Account</h2>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input 
+          type="text" 
+          id="name" 
+          formControlName="name" 
+          placeholder="Enter your full name"
+          [ngClass]="{'invalid': formControls['name'].touched && formControls['name'].invalid}"
+        >
+        <div class="error-message" *ngIf="formControls['name'].touched && formControls['name'].errors">
+          <span *ngIf="formControls['name'].errors['required']">Name is required</span>
+          <span *ngIf="formControls['name'].errors['minlength']">Name must be at least 3 characters</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input 
+          type="email" 
+          id="email" 
+          formControlName="email" 
+          placeholder="Enter your email"
+          [ngClass]="{'invalid': formControls['email'].touched && formControls['email'].invalid}"
+        >
+        <div class="error-message" *ngIf="formControls['email'].touched && formControls['email'].errors">
+          <span *ngIf="formControls['email'].errors['required']">Email is required</span>
+          <span *ngIf="formControls['email'].errors['email']">Please enter a valid email</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="age">Age</label>
+        <input 
+          type="number" 
+          id="age" 
+          formControlName="age" 
+          placeholder="Enter your age"
+          [ngClass]="{'invalid': formControls['age'].touched && formControls['age'].invalid}"
+        >
+        <div class="error-message" *ngIf="formControls['age'].touched && formControls['age'].errors">
+          <span *ngIf="formControls['age'].errors['required']">Age is required</span>
+          <span *ngIf="formControls['age'].errors['min']">You must be at least 18 years old</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="job">Job Title</label>
+        <input 
+          type="text" 
+          id="job" 
+          formControlName="job" 
+          placeholder="Enter your job title"
+          [ngClass]="{'invalid': formControls['job'].touched && formControls['job'].invalid}"
+        >
+        <div class="error-message" *ngIf="formControls['job'].touched && formControls['job'].errors?.['required']">
+          Job title is required
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="dob">Date of Birth</label>
+        <input 
+          type="date" 
+          id="dob" 
+          formControlName="dob"
+          [ngClass]="{'invalid': formControls['dob'].touched && formControls['dob'].invalid}"
+        >
+        <div class="error-message" *ngIf="formControls['dob'].touched && formControls['dob'].errors?.['required']">
+          Date of birth is required
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input 
+          type="password" 
+          id="password" 
+          formControlName="password" 
+          placeholder="Enter password"
+          [ngClass]="{'invalid': formControls['password'].touched && formControls['password'].invalid}"
+        >
+        <div class="error-message" *ngIf="formControls['password'].touched && formControls['password'].errors">
+          <span *ngIf="formControls['password'].errors['required']">Password is required</span>
+          <span *ngIf="formControls['password'].errors['minlength']">Password must be at least 6 characters</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input 
+          type="password" 
+          id="confirmPassword" 
+          formControlName="confirmPassword" 
+          placeholder="Confirm your password"
+          [ngClass]="{'invalid': formControls['confirmPassword'].touched && formControls['confirmPassword'].invalid}"
+        >
+        <div class="error-message" *ngIf="formControls['confirmPassword'].touched && formControls['confirmPassword'].errors">
+          <span *ngIf="formControls['confirmPassword'].errors['required']">Please confirm your password</span>
+          <span *ngIf="formControls['confirmPassword'].errors['passwordMismatch']">Passwords do not match</span>
+        </div>
+      </div>
+
+      <div class="alert alert-danger" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <div class="alert alert-success" *ngIf="successMessage">
+        {{ successMessage }}
+      </div>
+
+      <button 
+        type="submit" 
+        class="register-btn" 
+        [disabled]="registerForm.invalid || isSubmitting">
+        <span *ngIf="isSubmitting">Registering...</span>
+        <span *ngIf="!isSubmitting">Register</span>
+      </button>
+
+      <div class="login-link">
+        Already have an account? <a routerLink="/login">Log in</a>
+      </div>
+    </form>
+  </div>
+</div>

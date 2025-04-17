@@ -1,0 +1,66 @@
+<!-- Report Page -->
+<div class="container-fluid py-4">
+    <!-- Report Header -->
+    <div class="card mb-4">
+      <div class="card-body">
+        <h3>Expense Reports</h3>
+        <div class="row g-3">
+          <div class="col-md-3">
+            <label class="form-label">Date Range</label>
+            <select class="form-select">
+              <option>Last 7 Days</option>
+              <option>Last 30 Days</option>
+              <option>Last 3 Months</option>
+              <option>Custom Range</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Category</label>
+            <select class="form-select">
+              <option>All Categories</option>
+              <option>Groceries</option>
+              <option>Transport</option>
+              <option>Utilities</option>
+            </select>
+          </div>
+          <div class="col-md-3 d-flex align-items-end">
+            <button class="btn btn-primary">
+              <i class="bi bi-download me-2"></i>Export Report
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Report Summary -->
+    <div class="row mb-4">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-body">
+            <h5>Expense Breakdown</h5>
+            <canvas id="expenseChart" height="300"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <h5>Category Summary</h5>
+            <div class="list-group">
+              <div class="list-group-item d-flex justify-content-between">
+                <span>Groceries</span>
+                <strong>$450.00</strong>
+              </div>
+              <div class="list-group-item d-flex justify-content-between">
+                <span>Transport</span>
+                <strong>$225.00</strong>
+              </div>
+              <div class="list-group-item d-flex justify-content-between">
+                <span>Utilities</span>
+                <strong>$350.00</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

@@ -1,1 +1,62 @@
 /* You can add global styles to this file, and also import other style files */
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: #343a40;
+    padding-top: 20px;
+}
+
+.sidebar h3 {
+    text-align: center;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar li {
+    padding: 10px;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: white;
+    display: block;
+    padding: 10px;
+}
+
+.sidebar a:hover, .sidebar .active {
+    background-color: #495057;
+    border-radius: 5px;
+}
+/* Base styles for all screens */
+.container {
+    width: 100%;
+    padding: 15px;
+  }
+  
+  /* For tablets and up */
+  @media (min-width: 768px) {
+    .container {
+      max-width: 750px;
+      margin: 0 auto;
+    }
+  }
+  
+  /* For desktops and up */
+  @media (min-width: 992px) {
+    .container {
+      max-width: 970px;
+    }
+  }
+  
+  /* For large desktops */
+  @media (min-width: 1200px) {
+    .container {
+      max-width: 1170px;
+    }
+  }

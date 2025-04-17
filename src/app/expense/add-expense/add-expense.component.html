@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Expense</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <style>
+        .expense-form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+        
+        .form-header {
+            margin-bottom: 25px;
+            text-align: center;
+            color: #3a3a3a;
+        }
+        
+        .form-control:focus {
+            border-color: #6c63ff;
+            box-shadow: 0 0 0 0.25rem rgba(108, 99, 255, 0.25);
+        }
+        
+        .btn-primary {
+            background-color: #6c63ff;
+            border-color: #6c63ff;
+        }
+        
+        .btn-primary:hover {
+            background-color: #5a52d5;
+            border-color: #5a52d5;
+        }
+        
+        .input-group-text {
+            background-color: #6c63ff;
+            color: white;
+            border-color: #6c63ff;
+        }
+        
+        .category-select {
+            height: calc(3.5rem + 2px);
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container py-5">
+        <div class="expense-form">
+            <div class="form-header">
+                <h2>Add New Expense</h2>
+                <p class="text-muted">Track your spending by adding a new expense</p>
+            </div>
+            <div *ngIf="successMessage" class="alert alert-success">
+                {{ successMessage }}
+              </div>
+              
+              <div *ngIf="errorMessage" class="alert alert-danger">
+                {{ errorMessage }}
+              </div>
+              <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()">
+                <div class="mb-4">
+                    <label for="date" class="form-label">Date</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-calendar"></i></span>
+                        <input type="date" class="form-control" id="date" formControlName="date" placeholder="Select date" required>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <label for="category" class="form-label">Category</label>
+                    <select class="form-select category-select" id="category" formControlName="category" required>
+                        <option value="" selected disabled>Select a category</option>
+                        <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+                    </select>
+                </div>
+                
+                <div class="mb-4">
+                    <label for="amount" class="form-label">Amount</label>
+                    <div class="input-group">
+                        <span class="input-group-text">Rs.</span>
+                        <input type="number" class="form-control" id="amount" formControlName="amount" placeholder="0.00" step="0.01" min="0.01" required>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea class="form-control" id="description" formControlName="description" rows="3" placeholder="Enter expense details"></textarea>
+                </div>
+                
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary w-100" [disabled]="loading || expenseForm.invalid">
+                        {{ loading ? 'Adding...' : 'Add Expense' }}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+
+  
+
+<div class="app-container">
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a routerLink="/dashboard">Expense Tracker</a>
+    </div>
+    <div class="navbar-menu">
+      <!-- User info and logout -->
+      <div class="user-info" *ngIf="isLoggedIn">
+        Welcome, {{ userName }}
+        <button (click)="logout()" class="logout-btn">Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main content area with sidebar -->
+  <div class="main-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <ul class="nav-links">
+        <li><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
+        <li><a routerLink="/expense" routerLinkActive="active">Expenses</a></li>
+        <li><a routerLink="/budget" routerLinkActive="active">Budget</a></li>
+        <li><a routerLink="/report" routerLinkActive="active">Reports</a></li>
+        <li><a routerLink="/profile" routerLinkActive="active">Profile</a></li>
+      </ul>
+    </div>
+
+    <!-- Page content area -->
+    <div class="content-area">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

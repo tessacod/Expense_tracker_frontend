@@ -1,0 +1,113 @@
+
+
+<!--new-->
+<div class="dashboard-container">
+  <div *ngIf="isLoading" class="loading-indicator">
+    <p>Loading your dashboard...</p>
+  </div>
+
+  <div *ngIf="!isLoading && error" class="error-container">
+    <p class="error-message">{{ error }}</p>
+  </div>
+
+  <!-- First-time user welcome screen -->
+  <div *ngIf="!isLoading && !error && firstTimeUser" class="welcome-container">
+    <h1>Welcome to Expense Tracker!</h1>
+    <p>Get started by setting up your budget or adding your first expense.</p>
+    
+    <div class="welcome-actions">
+      <a routerLink="/budget" class="btn btn-primary">Set Budget</a>
+      <a routerLink="/expense/add" class="btn btn-success">Add Expense</a>
+    </div>
+  </div>
+
+  <!-- Existing user dashboard -->
+  <div *ngIf="!isLoading && !error && !firstTimeUser" class="dashboard-content">
+    <h1>Dashboard for {{ getMonthName(currentMonth) }}</h1>
+    
+    <!-- Budget Summary -->
+    <div class="budget-summary">
+      <div class="budget-card">
+        <h3>Total Expenses</h3>
+        <p class="amount">Rs.{{ totalExpenses.toFixed(2) }}</p>
+        <p *ngIf="percentChange !== 0" class="percent-change" 
+           [ngClass]="{'positive': percentChange < 0, 'negative': percentChange > 0}">
+          {{ percentChange > 0 ? '↑' : '↓' }} {{ Math.abs(percentChange).toFixed(1) }}% from last month
+        </p>
+      </div>
+      
+      <div class="budget-card">
+        <h3>Monthly Budget</h3>
+        <p class="amount" *ngIf="budgetSet">Rs.{{ monthlyBudget.toFixed(2) }}</p>
+        <p class="no-budget" *ngIf="!budgetSet">Not set</p>
+        <a *ngIf="!budgetSet" routerLink="/budget" class="btn btn-sm btn-outline-primary">Set Budget</a>
+      </div>
+      
+      <div class="budget-card">
+        <h3>Status</h3>
+        <div *ngIf="budgetSet">
+          <p class="status" [ngClass]="{
+            'status-good': totalExpenses <= monthlyBudget * 0.8,
+            'status-warning': totalExpenses > monthlyBudget * 0.8 && totalExpenses <= monthlyBudget,
+            'status-danger': totalExpenses > monthlyBudget
+          }">
+            {{ totalExpenses <= monthlyBudget * 0.8 ? 'Good' : 
+               totalExpenses <= monthlyBudget ? 'Warning' : 'Over Budget' }}
+          </p>
+          <p class="budget-remaining">
+            {{ totalExpenses <= monthlyBudget ? 
+              'Rs.' + (monthlyBudget - totalExpenses).toFixed(2) + ' remaining' : 
+              'Rs.' + (totalExpenses - monthlyBudget).toFixed(2) + ' over budget' }}
+          </p>
+        </div>
+        <p *ngIf="!budgetSet">Set a budget to track your spending status</p>
+      </div>
+      
+      <div class="budget-card">
+        <h3>Categories</h3>
+        <p class="category-count">{{ categoryCount }}</p>
+      </div>
+    </div>
+    
+    <!-- Chart Section -->
+    <div class="chart-container" *ngIf="hasExpenses">
+      <h3>Expense Breakdown</h3>
+      <canvas #pieChart></canvas>
+    </div>
+    
+    <!-- Recent Expenses Section -->
+    <div class="recent-expenses" *ngIf="hasExpenses">
+      <h3>Recent Expenses</h3>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Description</th>
+              <th>Category</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let expense of recentExpenses">
+              <td>{{ expense.date | date:'MMM d, y' }}</td>
+              <td>{{ expense.description }}</td>
+              <td>{{ expense.category }}</td>
+              <td>Rs.{{ expense.amount.toFixed(2) }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="view-all-link">
+        <a routerLink="/expense" class="btn btn-outline-primary">View All Expenses</a>
+      </div>
+    </div>
+
+    <!-- No Expenses Message -->
+    <div *ngIf="!hasExpenses && !firstTimeUser" class="no-expenses">
+      <h3>No expenses recorded this month</h3>
+      <p>Start tracking your expenses to see data here.</p>
+      <a routerLink="/expense/add" class="btn btn-primary">Add Expense</a>
+    </div>
+  </div>
+</div>

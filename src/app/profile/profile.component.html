@@ -1,0 +1,48 @@
+<div class="profile-container">
+  <div *ngIf="loading" class="loading">
+    <p>Loading profile...</p>
+  </div>
+  
+  <div *ngIf="error" class="error-message">
+    <p>{{ error }}</p>
+    <button (click)="loadUserProfile()">Try Again</button>
+  </div>
+  
+  <div *ngIf="!loading && !error && user" class="profile-content">
+    <h2>User Profile</h2>
+    
+    <div class="profile-card">
+      <div class="profile-header">
+        <h3>{{ user.name }}</h3>
+        <p class="email" *ngIf="user.email">{{ user.email }}</p>
+      </div>
+      
+      <div class="profile-details">
+        <div class="detail-item" *ngIf="user.username">
+          <label>Username:</label>
+          <span>{{ user.username }}</span>
+        </div>
+        
+        <div class="detail-item" *ngIf="user.age">
+          <label>Age:</label>
+          <span>{{ user.age }}</span>
+        </div>
+        
+        <div class="detail-item" *ngIf="user.job">
+          <label>Job:</label>
+          <span>{{ user.job }}</span>
+        </div>
+        
+        <div class="detail-item" *ngIf="user.dob">
+          <label>Date of Birth:</label>
+          <span>{{ user.dob | date }}</span>
+        </div>
+      </div>
+      
+      <!-- <div class="profile-actions">
+        <button (click)="navigateToEditProfile()">Edit Profile</button>
+        <button class="logout-btn" (click)="logout()">Logout</button> -->
+      <!-- </div> -->
+    </div>
+  </div>
+</div>
