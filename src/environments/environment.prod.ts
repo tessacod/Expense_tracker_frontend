@@ -1,7 +1,7 @@
 export const environment = {
     production: true,
     name: 'prod',
-    apiUrl: 'http://localhost:3001',
+    apiUrl: 'https://expense-tracker-backend-5wm8.onrender.com',
     endpoints: {
       expense: {
         add: '/expense/add',
